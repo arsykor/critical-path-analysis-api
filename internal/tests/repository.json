@@ -1,0 +1,149 @@
+[
+  {
+    "id": 1,
+    "start_date": "2022-01-24T00:00:00Z",
+    "end_date": "2022-02-08T00:00:00Z",
+    "predecessors": [],
+    "name": "Task A"
+  },
+  {
+    "id": 2,
+    "start_date": "2022-02-04T00:00:00Z",
+    "end_date": "2022-02-17T00:00:00Z",
+    "predecessors": [3],
+    "name": "Task B"
+  },
+  {
+    "id": 3,
+    "start_date": "2022-02-24T00:00:00Z",
+    "end_date": "2022-02-03T00:00:00Z",
+    "predecessors": [],
+    "name": "Task C"
+  },
+  {
+    "id": 4,
+    "start_date": "2022-02-04T00:00:00Z",
+    "end_date": "2022-02-17T00:00:00Z",
+    "predecessors": [3],
+    "name": "Task D"
+  },
+  {
+    "id": 5,
+    "start_date": "2022-01-24T00:00:00Z",
+    "end_date": "2022-02-07T00:00:00Z",
+    "predecessors": [],
+    "name": "Task E"
+  },
+  {
+    "id": 6,
+    "start_date": "2022-02-09T00:00:00Z",
+    "end_date": "2022-02-28T00:00:00Z",
+    "predecessors": [1],
+    "name": "Task F"
+  },
+  {
+    "id": 7,
+    "start_date": "2022-02-18T00:00:00Z",
+    "end_date": "2022-03-01T00:00:00Z",
+    "predecessors": [4],
+    "name": "Task G"
+  },
+  {
+    "id": 8,
+    "start_date": "2022-02-18T00:00:00Z",
+    "end_date": "2022-03-01T00:00:00Z",
+    "predecessors": [2],
+    "name": "Task H"
+  },
+  {
+    "id": 9,
+    "start_date": "2022-03-01T00:00:00Z",
+    "end_date": "2022-03-21T00:00:00Z",
+    "predecessors": [6],
+    "name": "Task I"
+  },
+  {
+    "id": 10,
+    "start_date": "2022-03-02T00:00:00Z",
+    "end_date": "2022-03-15T00:00:00Z",
+    "predecessors": [7],
+    "name": "Task J"
+  },
+  {
+    "id": 11,
+    "start_date": "2022-03-02T00:00:00Z",
+    "end_date": "2022-03-20T00:00:00Z",
+    "predecessors": [7, 8],
+    "name": "Task K"
+  },
+  {
+    "id": 12,
+    "start_date": "2022-03-02T00:00:00Z",
+    "end_date": "2022-03-22T00:00:00Z",
+    "predecessors": [8],
+    "name": "Task L"
+  },
+  {
+    "id": 13,
+    "start_date": "2022-02-08T00:00:00Z",
+    "end_date": "2022-02-22T00:00:00Z",
+    "predecessors": [5],
+    "name": "Task M"
+  },
+  {
+    "id": 14,
+    "start_date": "2022-03-16T00:00:00Z",
+    "end_date": "2022-03-30T00:00:00Z",
+    "predecessors": [10],
+    "name": "Task N"
+  },
+  {
+    "id": 15,
+    "start_date": "2022-03-21T00:00:00Z",
+    "end_date": "2022-03-29T00:00:00Z",
+    "predecessors": [11],
+    "name": "Task O"
+  },
+  {
+    "id": 16,
+    "start_date": "2022-03-10T00:00:00Z",
+    "end_date": "2022-03-23T00:00:00Z",
+    "predecessors": [12],
+    "name": "Task P"
+  },
+  {
+    "id": 17,
+    "start_date": "2022-02-23T00:00:00Z",
+    "end_date": "2022-03-16T00:00:00Z",
+    "predecessors": [13],
+    "name": "Task Q"
+  },
+  {
+    "id": 18,
+    "start_date": "2022-03-31T00:00:00Z",
+    "end_date": "2022-04-14T00:00:00Z",
+    "predecessors": [14, 15],
+    "name": "Task R"
+  },
+  {
+    "id": 19,
+    "start_date": "2022-03-24T00:00:00Z",
+    "end_date": "2022-04-04T00:00:00Z",
+    "predecessors": [16, 9, 17],
+    "name": "Task S"
+  },
+  {
+    "id": 20,
+    "start_date": "2022-04-05T00:00:00Z",
+    "end_date": "2022-04-19T00:00:00Z",
+    "predecessors": [19],
+    "name": "Task T"
+  },
+  {
+    "id": 21,
+    "start_date": "2022-04-15T00:00:00Z",
+    "end_date": "2022-04-24T00:00:00Z",
+    "predecessors": [16, 18],
+    "name": "Task U"
+  }
+]
