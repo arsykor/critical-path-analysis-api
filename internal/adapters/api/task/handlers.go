@@ -72,7 +72,21 @@ func (h *handler) GetAllTasks(context *gin.Context) {
 }
 
 func (h *handler) UpdateTask(context *gin.Context) {
+	var tasks []task.Task
 
+	jsonData, _ := ioutil.ReadAll(context.Request.Body)
+
+	err := json.Unmarshal(jsonData, &tasks)
+	if err != nil {
+		context.IndentedJSON(http.StatusOK, err)
+	}
+
+	arrangedTasks, err := h.service.Update(&tasks[0])
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	context.IndentedJSON(http.StatusOK, arrangedTasks)
 }
 
 func (h *handler) DeleteTask(context *gin.Context) {
@@ -81,5 +95,10 @@ func (h *handler) DeleteTask(context *gin.Context) {
 		fmt.Println(err)
 	}
 
-	h.service.Delete(id)
+	arrangedTasks, err := h.service.Delete(id)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	context.IndentedJSON(http.StatusOK, arrangedTasks)
 }
