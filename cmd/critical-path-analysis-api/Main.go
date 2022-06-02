@@ -4,16 +4,16 @@ import (
 	"context"
 	"critical-path-analysis-api/internal/composites"
 	"critical-path-analysis-api/internal/config"
-	"critical-path-analysis-api/internal/tests"
 	"critical-path-analysis-api/pkg/client/postgresql"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	tests.InitTestRepository()
-
-	conf := config.NewConfig()
+	conf, err := config.NewConfig()
+	if err != nil {
+		return
+	}
 
 	postgresqlClient, err := postgresql.NewClient(context.Background(), 5, conf)
 	if err != nil {
@@ -21,8 +21,9 @@ func main() {
 	}
 
 	taskComp := composites.NewTaskComposite(postgresqlClient)
+
 	router := gin.Default()
 	taskComp.Handler.Register(router, "task")
-
-	router.Run("localhost:8080")
+	addr := fmt.Sprintf("%s:%s", conf.Server.Host, conf.Server.Port)
+	router.Run(addr)
 }

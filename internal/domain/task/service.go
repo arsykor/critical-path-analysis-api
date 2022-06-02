@@ -16,12 +16,20 @@ func (s *service) GetById(id int) (*Task, error) {
 	return tasks, nil
 }
 
-func (s *service) GetAll() *[]Task {
-	return s.storage.GetAll()
+func (s *service) GetAll() (*[]Task, error) {
+	tasks, err := s.storage.GetAll()
+	if err != nil {
+		return nil, err
+	}
+	return tasks, nil
 }
 
-func (s *service) Create(tasks *[]Task) *[]Task {
-	return s.storage.Create(tasks)
+func (s *service) Create(tasks *[]Task) (*[]Task, error) {
+	tasks, err := s.storage.Create(tasks)
+	if err != nil {
+		return nil, err
+	}
+	return tasks, nil
 }
 
 func (s *service) Delete(id int) (*[]Task, error) {

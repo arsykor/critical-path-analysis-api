@@ -20,7 +20,7 @@ type Client interface {
 }
 
 func NewClient(ctx context.Context, attempts int, config *config.Config) (*pgxpool.Pool, error) {
-	cs := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", config.Username, config.Password, config.Host, config.Port, config.Database)
+	cs := fmt.Sprintf("postgresql://%s:%s@%s:%s/%s", config.Storage.Username, config.Storage.Password, config.Storage.Host, config.Storage.Port, config.Storage.Database)
 
 	for attempts > 0 {
 		ctx, cancel := context.WithTimeout(ctx, 10*time.Second)

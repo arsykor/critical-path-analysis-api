@@ -1,21 +1,39 @@
 package config
 
+import (
+	"gopkg.in/yaml.v3"
+	"os"
+)
+
 type Config struct {
-	Username string
-	Password string
-	Host     string
-	Port     string
-	Database string
+	Server struct {
+		Host string `yaml:"host"`
+		Port string `yaml:"port"`
+	} `yaml:"server"`
+
+	Storage struct {
+		Username string `yaml:"username"`
+		Password string `yaml:"password"`
+		Host     string `yaml:"host"`
+		Port     string `yaml:"port"`
+		Database string `yaml:"database"`
+	} `yaml:"storage"`
 }
 
-func NewConfig() *Config {
+func NewConfig() (*Config, error) {
 	config := &Config{}
 
-	config.Username = "postgres"
-	config.Password = "postgres"
-	config.Host = "localhost"
-	config.Port = "5432"
-	config.Database = "db_tasks"
+	file, err := os.Open("config.yml")
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-	return config
+	d := yaml.NewDecoder(file)
+
+	if err := d.Decode(&config); err != nil {
+		return nil, err
+	}
+
+	return config, nil
 }

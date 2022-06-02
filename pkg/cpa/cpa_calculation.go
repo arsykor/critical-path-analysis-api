@@ -2,15 +2,17 @@ package cpa
 
 import (
 	"critical-path-analysis-api/internal/domain/task"
+	"errors"
+	"fmt"
 	"golang.org/x/exp/slices"
 	"time"
 )
 
 var zeroTime time.Time
 
-func Arrange(tasks *[]task.Task) {
+func Arrange(tasks *[]task.Task) error {
 	if len(*tasks) < 2 {
-		return
+		return nil
 	}
 
 	var iterations int
@@ -31,6 +33,7 @@ func Arrange(tasks *[]task.Task) {
 			iterations++
 		}
 	}
+	fmt.Println("*** for 1")
 
 	//Dividing tasks by ranks:
 Loop:
@@ -38,7 +41,12 @@ Loop:
 		rank++
 
 		for i, t := range *tasks {
-			if !t.IsConsidered && allPreviousTasksConsidered(t, tasks) {
+			allPredConsidered, err := allPreviousTasksConsidered(t, tasks)
+			if err != nil {
+				return err
+			}
+
+			if !t.IsConsidered && allPredConsidered {
 				(*tasks)[i].Rank = rank
 				tasksConsideredLocally = append(tasksConsideredLocally, t.Id)
 				iterations++
@@ -54,7 +62,7 @@ Loop:
 			break Loop
 		}
 	}
-
+	fmt.Println("*** Loop")
 	//Enter the data rank-by-rank:
 	for i := 1; i <= rank; i++ {
 		tasksOfIRang := filterTasks(func(task task.Task) bool { return task.Rank == i }, tasks)
@@ -69,6 +77,9 @@ Loop:
 			}
 		}
 	}
+	fmt.Println("*** rank-by-rank")
+
+	return nil
 }
 
 func durationExcludingWeekends(from time.Time, to time.Time) int {
@@ -136,11 +147,16 @@ func getTaskById(id int, tasks *[]task.Task) *task.Task {
 	return &(*tasks)[index]
 }
 
-func allPreviousTasksConsidered(t task.Task, tasks *[]task.Task) bool {
+func allPreviousTasksConsidered(t task.Task, tasks *[]task.Task) (bool, error) {
 	for _, p := range t.Predecessors {
+		if p == t.Id {
+			resp := fmt.Sprintf("the task cannot include itself in the array of predecessors, task id: %d", t.Id)
+			return false, errors.New(resp)
+		}
+
 		if !getTaskById(p, tasks).IsConsidered {
-			return false
+			return false, nil
 		}
 	}
-	return true
+	return true, nil
 }

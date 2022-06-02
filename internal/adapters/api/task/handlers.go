@@ -4,7 +4,6 @@ import (
 	"critical-path-analysis-api/internal/adapters/api"
 	"critical-path-analysis-api/internal/domain/task"
 	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
@@ -38,28 +37,37 @@ func (h *handler) Register(router *gin.Engine, rootName string) {
 func (h *handler) CreateTask(context *gin.Context) {
 	var tasks []task.Task
 
-	jsonData, _ := ioutil.ReadAll(context.Request.Body)
-
-	err := json.Unmarshal(jsonData, &tasks)
+	jsonData, err := ioutil.ReadAll(context.Request.Body)
 	if err != nil {
-		context.IndentedJSON(http.StatusOK, err)
+		returnError(context, err)
+		return
 	}
 
-	context.IndentedJSON(http.StatusOK, h.service.Create(&tasks))
+	err = json.Unmarshal(jsonData, &tasks)
+	if err != nil {
+		returnError(context, err)
+		return
+	}
+
+	tasksOut, err := h.service.Create(&tasks)
+	if err != nil {
+		returnError(context, err)
+		return
+	}
+
+	context.IndentedJSON(http.StatusOK, tasksOut)
 }
 
 func (h *handler) GetTask(context *gin.Context) {
 	id, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
-		fmt.Println(err)
+		returnError(context, err)
+		return
 	}
 
 	task, err := h.service.GetById(id)
 	if err != nil {
-		context.JSON(http.StatusBadRequest, Error{
-			Code:    http.StatusBadRequest,
-			Message: err.Error(),
-		})
+		returnError(context, err)
 		return
 	}
 
@@ -67,23 +75,34 @@ func (h *handler) GetTask(context *gin.Context) {
 }
 
 func (h *handler) GetAllTasks(context *gin.Context) {
-	tasks := h.service.GetAll()
+	tasks, err := h.service.GetAll()
+	if err != nil {
+		returnError(context, err)
+		return
+	}
+
 	context.IndentedJSON(http.StatusOK, tasks)
 }
 
 func (h *handler) UpdateTask(context *gin.Context) {
 	var tasks []task.Task
 
-	jsonData, _ := ioutil.ReadAll(context.Request.Body)
-
-	err := json.Unmarshal(jsonData, &tasks)
+	jsonData, err := ioutil.ReadAll(context.Request.Body)
 	if err != nil {
-		context.IndentedJSON(http.StatusOK, err)
+		returnError(context, err)
+		return
+	}
+
+	err = json.Unmarshal(jsonData, &tasks)
+	if err != nil {
+		returnError(context, err)
+		return
 	}
 
 	arrangedTasks, err := h.service.Update(&tasks[0])
 	if err != nil {
-		fmt.Println(err)
+		returnError(context, err)
+		return
 	}
 
 	context.IndentedJSON(http.StatusOK, arrangedTasks)
@@ -92,13 +111,22 @@ func (h *handler) UpdateTask(context *gin.Context) {
 func (h *handler) DeleteTask(context *gin.Context) {
 	id, err := strconv.Atoi(context.Param("id"))
 	if err != nil {
-		fmt.Println(err)
+		returnError(context, err)
+		return
 	}
 
 	arrangedTasks, err := h.service.Delete(id)
 	if err != nil {
-		fmt.Println(err)
+		returnError(context, err)
+		return
 	}
 
 	context.IndentedJSON(http.StatusOK, arrangedTasks)
+}
+
+func returnError(context *gin.Context, err error) {
+	context.JSON(http.StatusBadRequest, Error{
+		Code:    http.StatusBadRequest,
+		Message: err.Error(),
+	})
 }

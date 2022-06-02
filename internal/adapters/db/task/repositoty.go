@@ -18,11 +18,11 @@ func (ts *taskRepository) GetOne(id int) (*task.Task, error) {
 	}
 	return tasks, nil
 }
-func (ts *taskRepository) GetAll() *[]task.Task {
-	return tests.TestRepository.GetAll()
+func (ts *taskRepository) GetAll() (*[]task.Task, error) {
+	return tests.TestRepository.GetAll(), nil
 }
-func (ts *taskRepository) Create(tasks *[]task.Task) *[]task.Task {
-	return tests.TestRepository.Create(tasks)
+func (ts *taskRepository) Create(tasks *[]task.Task) (*[]task.Task, error) {
+	return tests.TestRepository.Create(tasks), nil
 }
 func (ts *taskRepository) Delete(id int) (*[]task.Task, error) {
 	return nil, nil
