@@ -63,9 +63,7 @@ curl -X POST -H "Content-Type: application/json" -d '
 ]
 ' http://localhost:8080/task/create
 ```
-You can grab some test tasks from repository.json 
-
-`critical-path-analysis-api/blob/master/internal/tests/repository.json`
+You can grab some test tasks from repository.json - `critical-path-analysis-api/blob/master/internal/tests/repository.json`
 
 Specify the tasks-predecessors' IDs in the "predecessors" variable `[1,2,3,4]` for tasks, witch are supposed to be started after predecessors ones. For independent tasks or for first tasks of the project use an empty array - `[]`.
 
