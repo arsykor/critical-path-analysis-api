@@ -74,7 +74,7 @@ JSON response for failed requests looks like:
 ```json
 {
     "code": 400,
-    "message": "the task cannot include itself in the array of predecessors, task id: 2"
+    "message": "the task can't include itself in the array of predecessors, task id: 2"
 }
 ```
 
