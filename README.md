@@ -33,7 +33,7 @@ All necessary scripts are located in the `database.sql` file.
 
 When a RESTful API server is ready, it provides the following endpoints (by default it runs at `http://127.0.0.1:8080`):
 
-* `POST /task/create` - creare tasks*
+* `POST /task/create` - create tasks*
 * `GET /task/get/:id` - get task by id
 * `GET /task/get` - get all tasks
 * `POST /task/update` - update task
