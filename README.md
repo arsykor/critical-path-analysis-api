@@ -69,6 +69,15 @@ You can grab some test tasks from repository.json - `critical-path-analysis-api/
 
 Specify the tasks-predecessors' IDs in the "predecessors" variable `[1,2,3,4]` for tasks, witch are supposed to be started after predecessors ones. For independent tasks or for first tasks of the project use an empty array - `[]`.
 
+JSON response for failed requests looks like:
+
+```json
+{
+    "code": 400,
+    "message": "the task cannot include itself in the array of predecessors, task id: 2"
+}
+```
+
 ## Critical Path Analysis
 
 Interconnection of tasks is requered for tracking changes in task deadlines. If the tasks lying on the critical path are delayed, trimed or removed,  the whole project completion will be changed.
