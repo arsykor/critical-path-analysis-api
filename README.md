@@ -39,7 +39,7 @@ When a RESTful API server is ready, it provides the following endpoints (by defa
 * `POST /task/update` - update task
 * `GET /task/delete/:id` - delete task by id
 
-*You can send all the tasks in the request, regardless of whether it already exists in the database or not. The system will determine which tasks are new, the parameters of which tasks have been changed. The tasks with changed deadlines will be added to the directory of changes. In the future, it will be possible to check the historicity of changes to each task.
+*You can send all the tasks in the request, regardless of whether it already exists in the database or not. The system will determine which tasks are new, the parameters of which tasks have been changed. The tasks with changed deadlines will be added to the directory of changes. In the future, it will be possible to check the historicity of changes for each task.
 
 You can check the correctness of the application build via `POST /task/create` request with test data.
 
