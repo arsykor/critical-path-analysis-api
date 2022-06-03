@@ -31,13 +31,15 @@ All necessary scripts are located in the `database.sql` file.
 
 ## API endpoints
 
-When a RESTful API server is ready it provides the following endpoints (by default it runs at `http://127.0.0.1:8080`):
+When a RESTful API server is ready, it provides the following endpoints (by default it runs at `http://127.0.0.1:8080`):
 
-* `POST /task/create` - creare tasks
+* `POST /task/create` - creare tasks*
 * `GET /task/get/:id` - get task by id
 * `GET /task/get` - get all tasks
 * `POST /task/update` - update task
 * `GET /task/delete/:id` - delete task by id
+
+*You can send all the tasks in the request, regardless of whether it already exists in the database or not. The system will determine which tasks are new, the parameters of which tasks have been changed. The tasks with changed deadlines will be added to the directory of changes. In the future, it will be possible to check the historicity of changes to each task.
 
 You can check the correctness of the application build via `POST /task/create` request with test data.
 
