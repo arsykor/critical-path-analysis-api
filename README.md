@@ -13,6 +13,7 @@ Using CPA provides the possibility of considering the interconnectedness of the 
 1. Clone the project from GitHub:
 
 ```shell
+# Clone from GitHub
 git clone https://github.com/arsykor/critical-path-analysis-api
 ```
 
