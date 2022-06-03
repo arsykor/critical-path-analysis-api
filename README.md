@@ -7,7 +7,7 @@ The solution provides the following functionality:
 * storing tasks in a database (PostgreSQL client or in-memory)
 * Critical Path Method technique used for planning and scheduling tasks
  
-Using CPA provides the possibility of considering the interconnectedness of the tasks, which leads to the fact that if the tasks lying on the critical path are delayed, trimed or removed the whole project completion will change.
+Using CPA provides the possibility of considering the interconnectedness of the tasks, which leads to the fact that if the tasks lying on the critical path are delayed, trimed or removed the whole project completion will be changed.
 
 ## Getting Started
 1. Clone the project from GitHub:
