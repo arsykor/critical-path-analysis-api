@@ -22,8 +22,7 @@ git clone https://github.com/arsykor/critical-path-analysis-api
 ```
 # Build and Run
 cd critical-path-analysis-api
-go build
-./critical-path-analysis-api
+go build ./critical-path-analysis-api
 ```
 
 3. Set up a PostgreSQL Database:
