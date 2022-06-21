@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 	"os"
@@ -26,7 +25,6 @@ func NewConfig() (*Config, error) {
 	config := &Config{}
 
 	configPath, exists := os.LookupEnv("CONFIG_PATH")
-	fmt.Println("+++", configPath)
 
 	if !exists {
 		return nil, errors.New("specify the path to the configuration file in .env file")
