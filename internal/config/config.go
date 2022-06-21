@@ -1,6 +1,8 @@
 package config
 
 import (
+	"fmt"
+	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 	"os"
 )
@@ -23,7 +25,14 @@ type Config struct {
 func NewConfig() (*Config, error) {
 	config := &Config{}
 
-	file, err := os.Open("config.yml")
+	configPath, exists := os.LookupEnv("CONFIG_PATH")
+	fmt.Println("+++", configPath)
+
+	if !exists {
+		return nil, errors.New("specify the path to the configuration file in .env file")
+	}
+
+	file, err := os.Open(configPath)
 	if err != nil {
 		return nil, err
 	}
