@@ -123,5 +123,6 @@ On the Gantt Chart below Task 4 depends on the completion of Task 2 and Task 3, 
 │   ├── client           database client
 │   └── cpa              CPA calculation
 ├── database.sql         scripts for database creation
-└── config.yml           configuration file
+├── config.yml           configuration file
+└── .env                 environment variables
 ```
