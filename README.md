@@ -17,12 +17,11 @@ Using CPA provides the possibility of considering the interconnectedness of the 
 git clone https://github.com/arsykor/critical-path-analysis-api
 ```
 
-2. Build and run the project:
+2. Run the project:
 
 ```shell
-# Build and run
-cd critical-path-analysis-api
-go build ./critical-path-analysis-api
+# Run
+go run ./...
 ```
 
 3. Set up a PostgreSQL Database:
